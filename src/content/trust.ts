@@ -12,3 +12,11 @@ export const capabilities: string[] = [
   "Python", "RDKit", "FastAPI", "Streamlit",
   "Molecular Docking", "Drug Discovery", "Scientific Software", "AI Automation",
 ];
+
+// Credential-style trust indicators shown beneath the hero CTA. Keep truthful.
+export const heroCredentials: string[] = [
+  "M.Pharm — Medicinal Chemistry",
+  "RDKit Specialist",
+  "FastAPI & Scientific Software",
+  "Drug Discovery Workflows",
+];

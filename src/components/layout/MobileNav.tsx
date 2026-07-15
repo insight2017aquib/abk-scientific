@@ -85,7 +85,7 @@ export function MobileNav() {
         <div
           id={panelId}
           ref={panelRef}
-          className="absolute inset-x-0 top-16 z-40 border-b border-slate-200 bg-white shadow-sm"
+          className="absolute inset-x-0 top-[4.5rem] z-40 border-b border-slate-200 bg-white shadow-sm"
         >
           <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4" aria-label="Mobile">
             {nav.map((item) => (
