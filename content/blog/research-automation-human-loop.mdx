@@ -1,0 +1,36 @@
+---
+title: "Research automation with a human in the loop"
+description: "Automate reformatting and triage without black-box AI where scientific judgment is required."
+date: "2026-01-20"
+category: "Research Automation"
+---
+
+Labs lose time on glue work: renaming files, reshaping tables, assembling status reports. Automation helps — until an opaque model changes a scientific decision with no trail.
+
+## A simple rule
+
+**Automate the mechanical. Keep humans on the judgment.**
+
+Good candidates:
+
+- Format conversion and column mapping  
+- Batch rename and folder layout  
+- Drafting report shells from known templates  
+
+Poor candidates (without checkpoints):
+
+- Interpreting assay anomalies  
+- Accepting/rejecting compounds on subtle SAR grounds  
+- Anything that must be defended in a regulatory or publication context without logs  
+
+## LLM-assisted steps
+
+Language models can help with triage and drafting **when** inputs/outputs are clear and a human reviews the result. Prefer:
+
+- Structured prompts  
+- Logged prompts and outputs  
+- Explicit “review required” gates  
+
+## Bottom line
+
+The goal is reliable hours back on a named workflow — not a chatbot demo. Start with a short audit of tasks that are frequent, painful, and mechanical enough to script.

@@ -1,0 +1,31 @@
+---
+title: "RDKit workflows chemists actually reuse"
+description: "How to structure RDKit pipelines so medicinal chemists can re-run the same standardize → describe → filter → export path without rebuilding notebooks."
+date: "2026-03-12"
+category: "RDKit"
+---
+
+Most RDKit usage in small teams starts as a notebook cell that “just works once.” Six months later nobody remembers which salt-stripping step was required, or why one library failed silently.
+
+## A durable pattern
+
+A reusable cheminformatics workflow is usually four stages:
+
+1. **Ingest** — SMILES, SDF, or mixed formats into one internal representation  
+2. **Standardize** — RDKit cleanup rules the team agrees on  
+3. **Compute** — descriptors, fingerprints, or filters  
+4. **Export** — tables and structure files other tools can open  
+
+The scientific decisions live in stages 2 and 3. The software job is to make those stages **explicit, logged, and re-runnable**.
+
+## What good looks like
+
+- Failures produce a row-level log, not a full crash with no output  
+- Parameters (e.g. molecular weight cutoffs) live in a config file, not buried in code  
+- A short validation note states assumptions (“we strip salts”, “we do not enumerate tautomers”)  
+
+## When to wrap it in a UI
+
+If only computational chemists run the pipeline, a CLI may be enough. When medicinal chemists need the same operations weekly, a thin desktop or Streamlit front end often pays for itself — that is the problem Chemistry Companion is aimed at.
+
+If your team is stuck between “I know the chemistry” and “I can maintain the script,” that is a classic consulting engagement boundary.
