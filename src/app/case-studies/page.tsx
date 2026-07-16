@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Section, SectionHeading } from "@/components/marketing/Section";
 import { CtaBand } from "@/components/marketing/CtaBand";
-import { caseStudies } from "@/content/case-studies";
+import { FeaturedCaseStudyCard } from "@/components/case-studies/FeaturedCaseStudyCard";
+import { getFeaturedCaseStudy, listedCaseStudies } from "@/content/case-studies";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -12,6 +13,8 @@ export const metadata = pageMetadata({
 });
 
 export default function CaseStudiesPage() {
+  const featured = getFeaturedCaseStudy();
+
   return (
     <>
       <Section className="pb-8">
@@ -20,8 +23,11 @@ export default function CaseStudiesPage() {
           title="How scientific software engagements look"
           subtitle="Illustrative methodology patterns for biotech and research teams — not named-client testimonials. Each study covers challenge, approach, technology, and intended outcome."
         />
+
+        {featured && <FeaturedCaseStudyCard study={featured} className="mt-10" />}
+
         <ul className="mt-10 grid gap-5 md:grid-cols-2">
-          {caseStudies.map((cs) => (
+          {listedCaseStudies().map((cs) => (
             <li key={cs.slug}>
               <Link
                 href={`/case-studies/${cs.slug}`}

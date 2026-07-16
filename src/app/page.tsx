@@ -9,7 +9,8 @@ import { ProductMock } from "@/components/product/ProductMock";
 import { JsonLd } from "@/components/JsonLd";
 import { services } from "@/content/services";
 import { projects } from "@/content/projects";
-import { caseStudies } from "@/content/case-studies";
+import { FeaturedCaseStudyCard } from "@/components/case-studies/FeaturedCaseStudyCard";
+import { getFeaturedCaseStudy, listedCaseStudies } from "@/content/case-studies";
 import { chemistryCompanion } from "@/content/chemistry-companion";
 import { getAllPosts } from "@/lib/blog";
 import { personJsonLd, serviceJsonLd } from "@/lib/seo";
@@ -18,6 +19,7 @@ import Link from "next/link";
 export default function HomePage() {
   const featuredProjects = projects.slice(0, 2);
   const latestPosts = getAllPosts().slice(0, 2);
+  const featuredCaseStudy = getFeaturedCaseStudy();
 
   return (
     <>
@@ -97,8 +99,11 @@ export default function HomePage() {
           title="How engagements are structured"
           subtitle="Methodology patterns for biotech and research teams — challenge, approach, technology, outcome."
         />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-          {caseStudies.map((cs) => (
+        {featuredCaseStudy && (
+          <FeaturedCaseStudyCard study={featuredCaseStudy} className="mt-10" />
+        )}
+        <ul className={`grid gap-4 sm:grid-cols-2 ${featuredCaseStudy ? "mt-4" : "mt-10"}`}>
+          {listedCaseStudies().map((cs) => (
             <li key={cs.slug}>
               <Link
                 href={`/case-studies/${cs.slug}`}
