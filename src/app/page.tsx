@@ -5,7 +5,7 @@ import { ServicePreviewCard } from "@/components/marketing/FeatureCard";
 import { ProjectCard } from "@/components/marketing/ProjectCard";
 import { CtaBand } from "@/components/marketing/CtaBand";
 import { ButtonLink } from "@/components/marketing/Button";
-import { ProductMock } from "@/components/product/ProductMock";
+import { Screenshot } from "@/components/product/Screenshot";
 import { JsonLd } from "@/components/JsonLd";
 import { services } from "@/content/services";
 import { projects } from "@/content/projects";
@@ -28,13 +28,25 @@ export default function HomePage() {
       <Hero />
       <TrustBar />
 
+      {/* Proof first: the validated docking run leads the page, ahead of any capability pitch. */}
+      {featuredCaseStudy && (
+        <Section className="bg-slate-50">
+          <SectionHeading
+            eyebrow="Proof"
+            title="A docking protocol that reproduces a known answer"
+            subtitle="Before a docking result informs a decision, the protocol has to recover a binding mode that is already established. Here is one doing exactly that — numbers, method, and limits in full."
+          />
+          <FeaturedCaseStudyCard study={featuredCaseStudy} className="mt-10 bg-white" />
+        </Section>
+      )}
+
       <Section>
         <SectionHeading
           eyebrow="What I do"
           title="Software that understands the science"
-          subtitle="Three focused services. Each starts from a real research problem — not a technology looking for a use."
+          subtitle="Four focused services. Each starts from a real research problem — not a technology looking for a use."
         />
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => (
             <ServicePreviewCard
               key={s.slug}
@@ -71,7 +83,10 @@ export default function HomePage() {
               </ButtonLink>
             </div>
           </div>
-          <ProductMock id="workspace" />
+          <Screenshot
+            id="dashboard"
+            alt="Chemistry Companion dashboard — the Molecular Analysis & Docking Workbench."
+          />
         </div>
       </Section>
 
@@ -97,12 +112,9 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Case studies"
           title="How engagements are structured"
-          subtitle="Methodology patterns for biotech and research teams — challenge, approach, technology, outcome."
+          subtitle="The patterns I work through most often with biotech and research teams — challenge, approach, technology, outcome."
         />
-        {featuredCaseStudy && (
-          <FeaturedCaseStudyCard study={featuredCaseStudy} className="mt-10" />
-        )}
-        <ul className={`grid gap-4 sm:grid-cols-2 ${featuredCaseStudy ? "mt-4" : "mt-10"}`}>
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
           {listedCaseStudies().map((cs) => (
             <li key={cs.slug}>
               <Link

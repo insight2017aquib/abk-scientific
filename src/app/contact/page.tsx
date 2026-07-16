@@ -1,7 +1,7 @@
 import { Section } from "@/components/marketing/Section";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { ButtonLink } from "@/components/marketing/Button";
-import { isPresentUrl, site } from "@/content/site";
+import { confidentiality, isPresentUrl, site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -99,6 +99,28 @@ export default function ContactPage() {
                 <p className="text-sm text-slate-500">Use the inquiry form to schedule.</p>
               )}
             </div>
+          </div>
+
+          <div className="rounded-xl border border-slate-200 p-6">
+            <h2 className="text-base font-semibold text-navy-900">{confidentiality.title}</h2>
+            <ul className="mt-4 space-y-3">
+              {confidentiality.points.map((point) => (
+                <li key={point.slice(0, 40)} className="flex gap-2.5 text-sm leading-relaxed text-slate-600">
+                  <svg
+                    viewBox="0 0 20 20"
+                    className="mt-0.5 h-4 w-4 shrink-0 fill-teal-600"
+                    aria-hidden
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 1.8l6 2.4v5c0 3.8-2.5 7.3-6 8.4-3.5-1.1-6-4.6-6-8.4v-5l6-2.4zm3.4 6.2a.9.9 0 10-1.3-1.2L9 10l-1.1-1.2a.9.9 0 10-1.3 1.2l1.8 1.9c.4.4 1 .4 1.3 0l3.7-3.9z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  {point}
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="rounded-xl bg-navy-900 p-6">

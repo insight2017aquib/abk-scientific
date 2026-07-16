@@ -31,6 +31,17 @@ export const site = {
   secondaryCta: { label: "View Projects", href: "/projects" },
 } as const;
 
+/** Confidentiality and IP terms. Standard, and stated up front because biotech
+ *  buyers ask before they share a structure — not after. */
+export const confidentiality = {
+  title: "Confidentiality & IP",
+  points: [
+    "Happy to sign your NDA before you send anything. If you'd rather not share structures up front, describe the workflow in general terms — that's usually enough for a first conversation.",
+    "You own the output. Source code, pipelines, and documentation I deliver are yours, along with the IP in them.",
+    "Your data stays yours. Compound structures, assay data, and unpublished results are never reused for other clients, added to a public example, or used as training data.",
+  ],
+} as const;
+
 /** True when a URL is non-empty and not a known incomplete stub. */
 export function isPresentUrl(url: string | undefined | null): boolean {
   if (!url || !url.trim()) return false;

@@ -101,21 +101,24 @@ export const chemistryCompanion = {
   ],
   screenshots: [
     {
-      id: "workspace",
-      title: "Main workspace",
-      caption: "Structure input and primary operations in one place (illustrative UI mock).",
+      id: "protein-analysis" as const,
+      title: "Protein analysis",
+      caption:
+        "Structure quality is scored before anything is docked — chains, residues, ligands, waters, resolution, and missing residues, with a recommendation on which chain to keep.",
     },
     {
-      id: "properties",
-      title: "Property panel",
-      caption: "Descriptor and property results as a readable table (illustrative UI mock).",
+      id: "pocket-selection" as const,
+      title: "Pocket selection",
+      caption:
+        "Ligand-defined pockets are detected with their centers and radii, ready to seed the grid box instead of placing it by eye.",
     },
     {
-      id: "batch",
-      title: "Batch view",
-      caption: "Multi-molecule runs for library-style work (illustrative UI mock).",
+      id: "docking-workspace" as const,
+      title: "Docking workspace",
+      caption:
+        "Ligand preparation and grid box beside a live Mol* view of the receptor — with a warning when the box has quietly become a blind-docking run.",
     },
   ],
   distributionNote:
-    "Windows build is distributed via GitHub Releases. The download button links out to the latest release rather than hosting the installer on this site. Screenshots below are branded UI mocks until production captures are available.",
+    "Windows build is distributed via GitHub Releases. The download button links out to the latest release rather than hosting the installer on this site.",
 };

@@ -1,8 +1,45 @@
 "use client";
 import { useState } from "react";
-import { site } from "@/content/site";
+import { isPresentUrl, site } from "@/content/site";
 
 type Status = "idle" | "submitting" | "success" | "error";
+
+/**
+ * Direct route to a human when the form can't deliver. Never renders a bare
+ * "email me directly" with no address: falls back to LinkedIn until
+ * NEXT_PUBLIC_CONTACT_EMAIL is set.
+ */
+function DirectContact({ className = "" }: { className?: string }) {
+  const email = site.email?.trim();
+  if (email) {
+    return (
+      <span className={className}>
+        Reach me directly at{" "}
+        <a href={`mailto:${email}`} className="font-medium text-teal-600 hover:text-teal-500">
+          {email}
+        </a>
+        .
+      </span>
+    );
+  }
+  if (isPresentUrl(site.socials.linkedin)) {
+    return (
+      <span className={className}>
+        You can also reach me on{" "}
+        <a
+          href={site.socials.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-teal-600 hover:text-teal-500"
+        >
+          LinkedIn
+        </a>
+        .
+      </span>
+    );
+  }
+  return null;
+}
 
 const projectTypes = ["Scientific Software", "Cheminformatics", "AI Automation", "Not sure yet"];
 const budgets = ["<$5k", "$5k–$15k", "$15k–$50k", "$50k+", "Not sure"];
@@ -14,7 +51,6 @@ const label = "text-sm font-medium text-navy-900";
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>("");
-  const hasEmail = Boolean(site.email?.trim());
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,13 +81,8 @@ export function ContactForm() {
       <div className="rounded-xl border border-teal-200 bg-teal-50 p-8 text-center">
         <h3 className="text-lg font-semibold text-navy-900">Thanks — message received.</h3>
         <p className="mt-2 text-sm text-slate-600">
-          I read every inquiry personally and will reply within two business days.
-          {hasEmail && (
-            <>
-              {" "}For anything time-sensitive, email me at{" "}
-              <a href={`mailto:${site.email}`} className="font-medium text-teal-600">{site.email}</a>.
-            </>
-          )}
+          I read every inquiry personally and will reply within two business days.{" "}
+          <DirectContact />
         </p>
       </div>
     );
@@ -106,7 +137,10 @@ export function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p className="rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>
+        <div className="rounded-md bg-red-50 px-4 py-3 text-sm text-red-700">
+          <p>{error}</p>
+          <DirectContact className="mt-1.5 block text-red-700" />
+        </div>
       )}
 
       <button
@@ -116,12 +150,7 @@ export function ContactForm() {
       >
         {status === "submitting" ? "Sending…" : "Send inquiry"}
       </button>
-      {hasEmail && (
-        <p className="text-xs text-slate-500">
-          Prefer email? Reach me at{" "}
-          <a href={`mailto:${site.email}`} className="font-medium text-teal-600">{site.email}</a>.
-        </p>
-      )}
+      <DirectContact className="block text-xs text-slate-500" />
       <p className="text-xs text-slate-500">
         Your name, email, and message are used only to respond to this inquiry. They are not sold
         or used for unrelated marketing.

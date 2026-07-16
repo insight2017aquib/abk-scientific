@@ -1,6 +1,6 @@
 /** Branded illustrative UI mocks for Chemistry Companion (placeholders for real screenshots). */
 
-type MockId = "workspace" | "properties" | "batch";
+export type MockId = "workspace" | "properties" | "batch";
 
 const titles: Record<MockId, string> = {
   workspace: "Chemistry Companion — Workspace",

@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { CaseStudy } from "@/content/case-studies";
 import { DockingPoster } from "./DockingPoster";
+import { hasShot, shotSrc } from "@/lib/screenshots";
 import { cn } from "@/lib/utils";
 
 /** Lead card for a featured case study — reused on home, projects, and case studies. */
@@ -11,6 +13,10 @@ export function FeaturedCaseStudyCard({
   study: CaseStudy;
   className?: string;
 }) {
+  // Real capture when it's on disk; the branded poster stands in until then.
+  const shot = study.screenshot;
+  const useShot = shot && hasShot(shot.id);
+
   return (
     <Link
       href={`/case-studies/${study.slug}`}
@@ -19,7 +25,19 @@ export function FeaturedCaseStudyCard({
         className
       )}
     >
-      <DockingPoster />
+      {useShot ? (
+        <div className="relative aspect-video overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+          <Image
+            src={shotSrc(shot.id)}
+            alt={shot.alt}
+            fill
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-contain"
+          />
+        </div>
+      ) : (
+        <DockingPoster />
+      )}
 
       <div>
         {study.badge && (

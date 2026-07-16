@@ -6,7 +6,7 @@ export function DockingPoster({ className = "" }: { className?: string }) {
     <div
       className={`overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm ${className}`}
       role="img"
-      aria-label="Molecular docking validation walkthrough (illustrative poster)"
+      aria-label="Diagram: a redocked pose compared against the published crystallographic pose"
     >
       {/* Title bar */}
       <div className="flex items-center gap-2 border-b border-slate-200 bg-navy-900 px-3 py-2">

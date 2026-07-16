@@ -4,9 +4,13 @@ import { ButtonLink } from "@/components/marketing/Button";
 import { MobileNav } from "./MobileNav";
 import { Logo } from "./Logo";
 
-/** Compact nav on large screens: primary items + more room for CTA */
+/** Desktop nav. Case Studies and About carry the proof and the person — for a
+ *  solo consultancy they are the trust pages, so they belong here, not just in
+ *  the footer. Home is reachable via the logo; Contact has the CTA button. */
 const primaryNav = nav.filter((item) =>
-  ["Services", "Projects", "Chemistry Companion", "Blog", "Contact"].includes(item.label)
+  ["Services", "Chemistry Companion", "Case Studies", "Projects", "About", "Blog"].includes(
+    item.label
+  )
 );
 
 export function SiteHeader() {

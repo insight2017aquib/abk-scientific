@@ -2,12 +2,13 @@ import { Section, SectionHeading } from "@/components/marketing/Section";
 import { CtaBand } from "@/components/marketing/CtaBand";
 import { ButtonLink } from "@/components/marketing/Button";
 import { JsonLd } from "@/components/JsonLd";
-import { ProductMock } from "@/components/product/ProductMock";
+import { Screenshot } from "@/components/product/Screenshot";
 import { WorkflowDiagram } from "@/components/product/WorkflowDiagram";
 import { InstallSteps } from "@/components/product/InstallSteps";
 import { ArchitectureGrid } from "@/components/product/ArchitectureGrid";
 import { chemistryCompanion as cc } from "@/content/chemistry-companion";
 import { site } from "@/content/site";
+import { hasShot } from "@/lib/screenshots";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -32,6 +33,8 @@ function softwareJsonLd() {
 export default function ChemistryCompanionPage() {
   const hasDownload = Boolean(cc.downloadUrl);
   const hasGithub = Boolean(cc.githubUrl);
+  // Don't claim these are real captures until they actually are.
+  const capturesReady = cc.screenshots.every((s) => hasShot(s.id));
 
   return (
     <>
@@ -66,7 +69,11 @@ export default function ChemistryCompanionPage() {
             </div>
             <p className="mt-4 text-xs text-slate-500">{cc.distributionNote}</p>
           </div>
-          <ProductMock id="workspace" />
+          <Screenshot
+            id="dashboard"
+            alt={`${cc.name} dashboard — the Molecular Analysis & Docking Workbench.`}
+            priority
+          />
         </div>
       </Section>
 
@@ -74,12 +81,16 @@ export default function ChemistryCompanionPage() {
         <SectionHeading
           eyebrow="Interface"
           title="What it looks like"
-          subtitle="Illustrative UI mocks until production screenshots ship. Drop real captures into public/images/chemistry-companion/ when ready."
+          subtitle={
+            capturesReady
+              ? "The running application, captured from a real docking session."
+              : "Product captures are being added. The panels below are branded stand-ins until they land."
+          }
         />
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
           {cc.screenshots.map((shot) => (
             <div key={shot.id}>
-              <ProductMock id={shot.id as "workspace" | "properties" | "batch"} />
+              <Screenshot id={shot.id} alt={`${cc.name} — ${shot.title}.`} />
               <p className="mt-3 text-sm font-semibold text-navy-900">{shot.title}</p>
               <p className="mt-1 text-xs leading-relaxed text-slate-500">{shot.caption}</p>
             </div>

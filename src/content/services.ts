@@ -13,6 +13,27 @@ export type Service = {
 // Consultant framing: problem -> capability -> outcome. No invented metrics.
 export const services: Service[] = [
   {
+    slug: "docking-validation",
+    title: "Docking Protocol Validation",
+    summary:
+      "Prove your docking setup reproduces a known binding mode — before it informs a real decision.",
+    problem:
+      "Docking is easy to run and easy to get quietly wrong. A grid box that drifted into blind docking, a mis-protonated ligand, a scoring function that mishandles your chemotype — none of these announce themselves. They produce confident numbers that rank the wrong compound first, and the error surfaces months later in the synthesis that didn't work.",
+    solution:
+      "I redock a ligand whose crystallographic pose is already published, measure RMSD against the experimental answer with a threshold agreed before the run, and report whether your protocol recovers the known mode. Where it doesn't, I say so and diagnose why. Where the literature says your engine is unreliable for your ligand class, I tell you that too — a validation that only ever passes isn't a validation.",
+    deliverables: [
+      "Redocking validation against a published reference pose, with symmetry-corrected RMSD",
+      "Documented protocol: receptor prep, grid definition, engine parameters, all recorded and re-runnable",
+      "A written statement of the acceptance criterion, fixed in advance",
+      "An explicit account of where the protocol's assumptions stop holding — chemotypes, targets, scoring limits",
+    ],
+    timeline:
+      "Typically 1–2 weeks for a single target and reference ligand. Multi-target or multi-engine comparisons take longer.",
+    goodFit:
+      "Teams about to make a decision on docking output — prioritizing a series, triaging a library, or putting a figure in a paper or a deck — who need to know the protocol holds up first.",
+    icon: "network",
+  },
+  {
     slug: "scientific-software",
     title: "Scientific Software Development",
     summary:

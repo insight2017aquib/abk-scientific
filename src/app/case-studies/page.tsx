@@ -21,7 +21,7 @@ export default function CaseStudiesPage() {
         <SectionHeading
           eyebrow="Case studies"
           title="How scientific software engagements look"
-          subtitle="Illustrative methodology patterns for biotech and research teams — not named-client testimonials. Each study covers challenge, approach, technology, and intended outcome."
+          subtitle="A validated docking protocol with its numbers in full, plus the engagement patterns I work through most often with biotech and research teams — challenge, approach, technology, outcome."
         />
 
         {featured && <FeaturedCaseStudyCard study={featured} className="mt-10" />}

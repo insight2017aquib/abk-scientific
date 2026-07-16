@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Section } from "@/components/marketing/Section";
 import { CtaBand } from "@/components/marketing/CtaBand";
 import { VideoEmbed } from "@/components/case-studies/VideoEmbed";
+import { DockingPoster } from "@/components/case-studies/DockingPoster";
+import { Screenshot } from "@/components/product/Screenshot";
 import { caseStudies, caseStudySections, getCaseStudy } from "@/content/case-studies";
 import { pageMetadata } from "@/lib/seo";
 
@@ -54,13 +56,50 @@ export default async function CaseStudyPage({ params }: Props) {
         <p className="mt-4 max-w-2xl text-lg text-slate-600">{cs.summary}</p>
         <p className="mt-3 max-w-2xl text-sm italic text-slate-500">{cs.framing}</p>
 
+        {cs.screenshot && (
+          <div className="mt-10 max-w-3xl">
+            <Screenshot
+              id={cs.screenshot.id}
+              alt={cs.screenshot.alt}
+              priority
+              className="shadow-lg ring-1 ring-navy-900/5"
+              fallback={<DockingPoster />}
+            />
+          </div>
+        )}
+
+        {cs.metrics && (
+          <dl className="mt-10 grid max-w-3xl gap-4 sm:grid-cols-2">
+            {cs.metrics.map((m) => (
+              <div key={m.label} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+                <dt className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  {m.label}
+                </dt>
+                <dd className="mt-1.5 text-2xl font-bold tracking-tight text-navy-900">
+                  {m.value}
+                </dd>
+                {m.note && (
+                  <dd className="mt-1.5 text-xs leading-relaxed text-slate-500">{m.note}</dd>
+                )}
+              </div>
+            ))}
+          </dl>
+        )}
+
         <div className="mt-12 space-y-10">
           {blocks.map((b) => (
             <div key={b.label}>
               <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
                 {b.label}
               </h2>
-              <p className="mt-2 max-w-3xl text-base leading-relaxed text-slate-700">{b.body}</p>
+              {b.body.split("\n\n").map((para) => (
+                <p
+                  key={para.slice(0, 40)}
+                  className="mt-2 max-w-3xl text-base leading-relaxed text-slate-700"
+                >
+                  {para}
+                </p>
+              ))}
               {b.bullets && (
                 <ul className="mt-4 max-w-3xl space-y-2.5 border-l-2 border-slate-100 pl-5">
                   {b.bullets.map((item) => (
@@ -72,6 +111,29 @@ export default async function CaseStudyPage({ params }: Props) {
               )}
             </div>
           ))}
+
+          {cs.disclaimer && (
+            <aside className="max-w-3xl rounded-xl border border-amber-200 bg-amber-50/60 p-6">
+              <h2 className="text-base font-semibold text-navy-900">{cs.disclaimer.title}</h2>
+              {cs.disclaimer.body.split("\n\n").map((para) => (
+                <p key={para.slice(0, 40)} className="mt-3 text-sm leading-relaxed text-slate-700">
+                  {para}
+                </p>
+              ))}
+              {cs.disclaimer.reference && (
+                <p className="mt-4 border-t border-amber-200 pt-4 text-xs leading-relaxed text-slate-600">
+                  <a
+                    href={cs.disclaimer.reference.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-teal-700 underline underline-offset-2 hover:text-teal-600"
+                  >
+                    {cs.disclaimer.reference.text}
+                  </a>
+                </p>
+              )}
+            </aside>
+          )}
 
           {cs.video && (
             <div>

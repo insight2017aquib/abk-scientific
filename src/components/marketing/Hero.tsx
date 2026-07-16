@@ -1,7 +1,8 @@
 import { site } from "@/content/site";
 import { heroCredentials } from "@/content/trust";
 import { ButtonLink } from "./Button";
-import { ProductMock } from "@/components/product/ProductMock";
+import { Screenshot } from "@/components/product/Screenshot";
+import { DockingPoster } from "@/components/case-studies/DockingPoster";
 
 export function Hero() {
   return (
@@ -52,15 +53,19 @@ export function Hero() {
             </ul>
           </div>
 
-          {/* Supporting product visual — illustrative Chemistry Companion mock */}
+          {/* Supporting visual — the validation run itself, as proof above the fold */}
           <div className="relative animate-fade-up">
             <div
               aria-hidden
               className="pointer-events-none absolute -inset-6 -z-10 rounded-3xl bg-teal-500/[0.06] blur-2xl"
             />
-            <div className="rounded-xl shadow-xl ring-1 ring-navy-900/5">
-              <ProductMock id="workspace" />
-            </div>
+            <Screenshot
+              id="docking-validation"
+              alt="Chemistry Companion protocol validation: redocking of the native ligand passed at 0.633 Å RMSD."
+              priority
+              className="shadow-xl ring-1 ring-navy-900/5"
+              fallback={<DockingPoster />}
+            />
           </div>
         </div>
       </div>
