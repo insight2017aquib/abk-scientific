@@ -1,0 +1,17 @@
+# Normalize text to LF in the repo; checkout uses the platform default.
+* text=auto eol=lf
+
+# Binary proof assets — never apply line-ending conversion.
+# Without this, core.autocrlf=true corrupts the PDF on checkout: Git sniffs only
+# the first 8KB for a NUL byte, and this PDF's compressed streams have none, so
+# it gets misclassified as text. The PNGs are detected correctly, but they are
+# pinned here too so the rule does not depend on header luck.
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.webp  binary
+*.woff  binary
+*.woff2 binary
