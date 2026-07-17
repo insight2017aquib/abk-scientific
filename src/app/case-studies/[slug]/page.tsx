@@ -86,6 +86,24 @@ export default async function CaseStudyPage({ params }: Props) {
           </dl>
         )}
 
+        {cs.report && (
+          <div className="mt-8 max-w-3xl">
+            <a
+              href={cs.report.href}
+              download
+              className="inline-flex items-center gap-2.5 rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-navy-900 shadow-sm transition-colors hover:border-teal-500 hover:text-teal-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+            >
+              <svg viewBox="0 0 20 20" className="h-4 w-4 fill-current" aria-hidden>
+                <path d="M10 2a.9.9 0 01.9.9v8.03l2.06-2.06a.9.9 0 111.28 1.26l-3.6 3.6a.9.9 0 01-1.28 0l-3.6-3.6a.9.9 0 111.28-1.26L9.1 10.93V2.9A.9.9 0 0110 2zM3.5 14.5a.9.9 0 01.9.9v1.2h11.2v-1.2a.9.9 0 111.8 0v1.5a1.5 1.5 0 01-1.5 1.5H4.1a1.5 1.5 0 01-1.5-1.5v-1.5a.9.9 0 01.9-.9z" />
+              </svg>
+              {cs.report.label}
+            </a>
+            {cs.report.note && (
+              <p className="mt-2 text-xs text-slate-500">{cs.report.note}</p>
+            )}
+          </div>
+        )}
+
         <div className="mt-12 space-y-10">
           {blocks.map((b) => (
             <div key={b.label}>

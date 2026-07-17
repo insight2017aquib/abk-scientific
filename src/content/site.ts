@@ -13,9 +13,10 @@ export const site = {
     "Boutique scientific software consultancy. I build cheminformatics pipelines, molecular analysis tools, and AI-driven lab automation for biotech, pharma, and academic research teams.",
   // Override with NEXT_PUBLIC_SITE_URL in production.
   url: env("NEXT_PUBLIC_SITE_URL") || "https://abk-scientific.com",
-  // Empty when unset → UI hides every mailto if blank, so we never ship a link to
-  // an unowned/bouncing address. Set NEXT_PUBLIC_CONTACT_EMAIL before launch.
-  email: env("NEXT_PUBLIC_CONTACT_EMAIL"),
+  // A real, owned inbox — the UI hides every mailto when this is blank, so a
+  // missing value silently removes the only reply path on the site. Override with
+  // NEXT_PUBLIC_CONTACT_EMAIL to swap in a domain address once one exists.
+  email: env("NEXT_PUBLIC_CONTACT_EMAIL") || "aquibtheone@hotmail.com",
   location: "Remote · Working with teams worldwide",
   socials: {
     // Canonical profiles (override via env if needed).
