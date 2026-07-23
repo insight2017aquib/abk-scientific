@@ -36,11 +36,21 @@ export function MdxContent({ source }: { source: string }) {
               {children}
             </a>
           ),
-          code: ({ children }) => (
-            <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-navy-900">
+          pre: ({ children }) => (
+            <pre className="mt-6 overflow-x-auto rounded-lg bg-slate-100 p-4 font-mono text-sm leading-relaxed text-navy-900">
               {children}
-            </code>
+            </pre>
           ),
+          // Fenced blocks arrive with a `language-*` class and are styled by `pre`;
+          // only inline code gets the pill treatment.
+          code: ({ className, children }) =>
+            className?.includes("language-") ? (
+              <code className={className}>{children}</code>
+            ) : (
+              <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-sm text-navy-900">
+                {children}
+              </code>
+            ),
         }}
       >
         {source}

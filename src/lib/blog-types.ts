@@ -16,6 +16,9 @@ export type BlogPostMeta = {
   date: string;
   category: BlogCategory;
   draft?: boolean;
+  /** Public path to the featured image, e.g. "/images/blog/foo.png". */
+  image?: string;
+  imageAlt?: string;
 };
 
 export type BlogPost = BlogPostMeta & {

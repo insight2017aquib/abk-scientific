@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Section } from "@/components/marketing/Section";
 import { CtaBand } from "@/components/marketing/CtaBand";
 import { MdxContent } from "@/components/blog/MdxContent";
@@ -20,6 +21,14 @@ export async function generateMetadata({ params }: Props) {
     title: post.title,
     description: post.description,
     path: `/blog/${post.slug}`,
+    image: post.image
+      ? {
+          url: post.image,
+          width: 1536,
+          height: 1024,
+          alt: post.imageAlt ?? post.title,
+        }
+      : undefined,
   });
 }
 
@@ -50,6 +59,17 @@ export default async function BlogPostPage({ params }: Props) {
           })}
         </time>
         <article className="mt-10 max-w-3xl">
+          {post.image && (
+            <Image
+              src={post.image}
+              alt={post.imageAlt ?? post.title}
+              width={1536}
+              height={1024}
+              priority
+              sizes="(min-width: 768px) 48rem, 100vw"
+              className="mb-10 h-auto w-full rounded-xl border border-slate-200"
+            />
+          )}
           <MdxContent source={post.content} />
         </article>
         {related.length > 0 && (

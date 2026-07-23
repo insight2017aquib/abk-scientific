@@ -14,8 +14,14 @@ export function pageMetadata(opts: {
   title: string;
   description: string;
   path?: string;
+  /** Per-page social card. Falls back to the site-wide branded image. */
+  image?: { url: string; width: number; height: number; alt: string };
 }): Metadata {
   const url = opts.path ? `${site.url}${opts.path}` : site.url;
+  // Social crawlers do not resolve relative paths, so absolute URLs only.
+  const images = opts.image
+    ? [{ ...opts.image, url: `${site.url}${opts.image.url}` }]
+    : ogImages;
   return {
     title: opts.title,
     description: opts.description,
@@ -26,13 +32,13 @@ export function pageMetadata(opts: {
       url,
       siteName: site.brand,
       type: "website",
-      images: ogImages,
+      images,
     },
     twitter: {
       card: "summary_large_image",
       title: opts.title,
       description: opts.description,
-      images: ["/opengraph-image"],
+      images: images.map((i) => i.url),
     },
   };
 }

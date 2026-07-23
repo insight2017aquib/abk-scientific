@@ -40,6 +40,8 @@ export function getPostBySlug(slug: string): BlogPost | null {
     date: String(data.date),
     category: data.category,
     draft: Boolean(data.draft),
+    ...(data.image ? { image: String(data.image) } : {}),
+    ...(data.imageAlt ? { imageAlt: String(data.imageAlt) } : {}),
     content,
   };
 }
